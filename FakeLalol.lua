@@ -176,6 +176,7 @@ G2L["277"]["Name"] = [[ClearButton]]
 
 local function C_67()
 local script = G2L["67"];
+	    local TextBox = G2L["11"]
 		local code = TextBox.Text
 	if code == "" then return end
 
@@ -187,51 +188,10 @@ task.spawn(C_67);
 
 local function C_277()
 local script = G2L["21"];
+	local TextBox = G2L["11"]
 	TextBox.Text = ""
 end;
 task.spawn(C_277);
-
-local function C_21()
-local script = G2L["21"];
-	local UIS = game:GetService("UserInputService")
-	function dragify(Frame)
-		dragToggle = nil
-		local dragSpeed = 0.33
-		dragInput = nil
-		dragStart = nil
-		local dragPos = nil
-		function updateInput(input)
-			local Delta = input.Position - dragStart
-			local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + Delta.X, startPos.Y.Scale, startPos.Y.Offset + Delta.Y)
-			game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.15), {Position = Position}):Play()
-		end
-		Frame.InputBegan:Connect(function(input)
-			if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UIS:GetFocusedTextBox() == nil then
-				dragToggle = true
-				dragStart = input.Position
-				startPos = Frame.Position
-				input.Changed:Connect(function()
-					if input.UserInputState == Enum.UserInputState.End then
-						dragToggle = false
-					end
-				end)
-			end
-		end)
-		Frame.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				dragInput = input
-			end
-		end)
-		game:GetService("UserInputService").InputChanged:Connect(function(input)
-			if input == dragInput and dragToggle then
-				updateInput(input)
-			end
-		end)
-	end
-	
-	dragify(script.Parent.Frame)
-end;
-task.spawn(C_21);
 
 G2L_MODULES[G2L["13"]] = {
 Closure = function()
